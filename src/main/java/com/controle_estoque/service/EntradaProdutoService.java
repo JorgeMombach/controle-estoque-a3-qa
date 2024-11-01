@@ -23,7 +23,7 @@ public class EntradaProdutoService {
     }
 
     public List<EntradaProduto> listarEntradas() {
-        return entradaProdutoRepository.findAll();
+        return entradaProdutoRepository.findByAtivoTrue();
     }
 
     public EntradaProduto registrarEntrada(EntradaProduto entradaProduto) {
@@ -43,9 +43,9 @@ public class EntradaProdutoService {
     }
 
     public void excluirEntrada(Long id) {
-        if (!entradaProdutoRepository.existsById(id)) {
-            throw new RuntimeException("Entrada de produto não encontrada com o ID: " + id);
-        }
-        entradaProdutoRepository.deleteById(id);
+        EntradaProduto entradaProduto = entradaProdutoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Entrada não encontrada com ID: "));
+        entradaProduto.setAtivo(false);
+        entradaProdutoRepository.save(entradaProduto);
     }
 }

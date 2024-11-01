@@ -11,18 +11,24 @@ public class SaidaProduto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
-
     @Column(nullable = false)
     private int quantidade;
-
     @Column(name = "data_saida", nullable = false)
     private LocalDateTime dataSaida;
+    @Column(nullable = false)
+    private Boolean ativo = true;
 
     public SaidaProduto() {
+    }
+
+    public SaidaProduto(Produto produto, int quantidade, LocalDateTime dataSaida, Boolean ativo) {
+        this.produto = produto;
+        this.quantidade = quantidade;
+        this.dataSaida = dataSaida;
+        this.ativo = ativo;
     }
 
     public SaidaProduto(Produto produto, int quantidade, LocalDateTime dataSaida) {
@@ -61,5 +67,24 @@ public class SaidaProduto {
 
     public void setDataSaida(LocalDateTime dataSaida) {
         this.dataSaida = dataSaida;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    @Override
+    public String toString() {
+        return "SaidaProduto{" +
+                "id=" + id +
+                ", produto=" + (produto != null ? produto.getNome() : "null") +
+                ", quantidade=" + quantidade +
+                ", dataSaida=" + dataSaida +
+                ", ativo=" + ativo +
+                '}';
     }
 }

@@ -15,8 +15,18 @@ public class Produto {
     private double preco;
     @Column(name = "quantidade_estoque", nullable = false)
     private int quantidadeEstoque;
+    @Column(nullable = false)
+    private Boolean ativo = true;
 
     public Produto() {
+    }
+
+    public Produto(String nome, String descricao, double preco, int quantidadeEstoque, Boolean ativo) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.quantidadeEstoque = quantidadeEstoque;
+        this.ativo = ativo;
     }
 
     public Produto(String nome, String descricao, double preco, int quantidadeEstoque) {
@@ -64,5 +74,25 @@ public class Produto {
 
     public void setQuantidadeEstoque(int quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", preco=" + preco +
+                ", quantidadeEstoque=" + quantidadeEstoque +
+                ", ativo=" + ativo +
+                '}';
     }
 }

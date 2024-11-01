@@ -11,22 +11,21 @@ public class EntradaProduto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
+    @Column(nullable = false)
+    private int quantidade;
+    @Column(name = "data_entrada", nullable = false)
     private LocalDateTime dataEntrada;
-    private Double precoUnitario;
-    private Integer quantidade;
 
     public EntradaProduto() {
     }
 
-    public EntradaProduto(Produto produto, LocalDateTime dataEntrada, Double precoUnitario, Integer quantidade) {
+    public EntradaProduto(Produto produto, int quantidade, LocalDateTime dataEntrada) {
         this.produto = produto;
-        this.dataEntrada = dataEntrada;
-        this.precoUnitario = precoUnitario;
         this.quantidade = quantidade;
+        this.dataEntrada = dataEntrada;
     }
 
     public Long getId() {
@@ -45,27 +44,19 @@ public class EntradaProduto {
         this.produto = produto;
     }
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
     public LocalDateTime getDataEntrada() {
         return dataEntrada;
     }
 
     public void setDataEntrada(LocalDateTime dataEntrada) {
         this.dataEntrada = dataEntrada;
-    }
-
-    public Double getPrecoUnitario() {
-        return precoUnitario;
-    }
-
-    public void setPrecoUnitario(Double precoUnitario) {
-        this.precoUnitario = precoUnitario;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
     }
 }

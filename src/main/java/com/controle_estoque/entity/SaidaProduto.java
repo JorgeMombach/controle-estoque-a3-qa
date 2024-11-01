@@ -11,16 +11,21 @@ public class SaidaProduto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
-    private Integer quantidade;
+
+    @Column(nullable = false)
+    private int quantidade;
+
+    @Column(name = "data_saida", nullable = false)
     private LocalDateTime dataSaida;
 
     public SaidaProduto() {
     }
 
-    public SaidaProduto(Produto produto, Integer quantidade, LocalDateTime dataSaida) {
+    public SaidaProduto(Produto produto, int quantidade, LocalDateTime dataSaida) {
         this.produto = produto;
         this.quantidade = quantidade;
         this.dataSaida = dataSaida;
@@ -42,11 +47,11 @@ public class SaidaProduto {
         this.produto = produto;
     }
 
-    public Integer getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Integer quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 

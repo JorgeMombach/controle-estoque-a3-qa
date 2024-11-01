@@ -1,5 +1,6 @@
 package com.controle_estoque.service;
 
+import com.controle_estoque.entity.EntradaProduto;
 import com.controle_estoque.entity.Produto;
 import com.controle_estoque.entity.SaidaProduto;
 import com.controle_estoque.repository.ProdutoRepository;
@@ -23,7 +24,7 @@ public class SaidaProdutoService {
     }
 
     public List<SaidaProduto> listarSaidas() {
-        return saidaProdutoRepository.findAll();
+        return saidaProdutoRepository.findByAtivoTrue();
     }
 
     public SaidaProduto registrarSaida(SaidaProduto saidaProduto) {
@@ -46,10 +47,10 @@ public class SaidaProdutoService {
     }
 
     public void excluirSaida(Long id) {
-        if (!saidaProdutoRepository.existsById(id)) {
-            throw new RuntimeException("Saída de produto não encontrada com o ID: " + id);
-        }
-        saidaProdutoRepository.deleteById(id);
+        SaidaProduto saidaProduto = saidaProdutoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Saída de produto não encontrada com ID: "));
+        saidaProduto.setAtivo(false);
+        saidaProdutoRepository.save(saidaProduto);
     }
 }
 

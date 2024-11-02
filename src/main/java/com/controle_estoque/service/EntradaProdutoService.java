@@ -1,5 +1,6 @@
 package com.controle_estoque.service;
 
+import com.controle_estoque.dto.EntradaProdutoDTO;
 import com.controle_estoque.entity.EntradaProduto;
 import com.controle_estoque.entity.Produto;
 import com.controle_estoque.repository.EntradaProdutoRepository;
@@ -26,16 +27,15 @@ public class EntradaProdutoService {
         return entradaProdutoRepository.findByAtivoTrue();
     }
 
-    public EntradaProduto registrarEntrada(EntradaProduto entradaProduto) {
-        Optional<Produto> produtoOptional = produtoRepository.findById(entradaProduto.getProduto().getId());
-        if (produtoOptional.isPresent()) {
-            Produto produto = produtoOptional.get();
-            produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() + entradaProduto.getQuantidade());
-            produtoRepository.save(produto);
-            return entradaProdutoRepository.save(entradaProduto);
-        } else {
-            throw new RuntimeException("Produto não encontrado com o ID: " + entradaProduto.getProduto().getId());
-        }
+    public EntradaProduto registrarEntrada(EntradaProdutoDTO entradaProdutoDTO) {
+        Produto produto = produtoRepository.findById(entradaProdutoDTO.getProdutoId())
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado com o ID: " + entradaProdutoDTO.getProdutoId()));
+
+        produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() + entradaProdutoDTO.getQuantidade());
+        produtoRepository.save(produto);
+
+        EntradaProduto entradaProduto = new EntradaProduto(produto, entradaProdutoDTO.getQuantidade(), entradaProdutoDTO.getDataEntrada(), true);
+        return entradaProdutoRepository.save(entradaProduto);
     }
 
     public Optional<EntradaProduto> encontrarEntradaPorId(Long id) {

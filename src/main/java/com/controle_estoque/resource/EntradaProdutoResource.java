@@ -1,5 +1,6 @@
 package com.controle_estoque.resource;
 
+import com.controle_estoque.dto.EntradaProdutoDTO;
 import com.controle_estoque.entity.EntradaProduto;
 import com.controle_estoque.service.EntradaProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class EntradaProdutoResource {
     }
 
     @PostMapping
-    public ResponseEntity<EntradaProduto> registrarEntrada(@RequestBody EntradaProduto entradaProduto) {
-        EntradaProduto novaEntrada = entradaProdutoService.registrarEntrada(entradaProduto);
+    public ResponseEntity<EntradaProduto> registrarEntrada(@RequestBody EntradaProdutoDTO entradaProdutoDTO) {
+        EntradaProduto novaEntrada = entradaProdutoService.registrarEntrada(entradaProdutoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(novaEntrada);
     }
 

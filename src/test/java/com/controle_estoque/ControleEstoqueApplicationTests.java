@@ -34,24 +34,32 @@ class ControleEstoqueApplicationTests {
         assertTrue(produto.getAtivo());
     }
 
-	@Test
-    void testGettersAndSetters() {
-        Produto produto = new Produto();
+        @Test
+        void testGettersAndSetters() {
+            Produto produto = new Produto();
+            
+            produto.setNome("Produto C");
+            assertEquals("Produto C", produto.getNome());
+            
+            produto.setDescricao("Descrição C");
+            assertEquals("Descrição C", produto.getDescricao());
+            
+            produto.setPreco(30.0);
+            assertEquals(30.0, produto.getPreco());
+            
+            produto.setQuantidadeEstoque(200);
+            assertEquals(200, produto.getQuantidadeEstoque());
+            
+            produto.setAtivo(false);
+            assertFalse(produto.getAtivo());
+        }
+
+        @Test
+        void testToString() {
+            Produto produto = new Produto("Produto D", "Descrição D", 40.0, 300, true);
         
-        produto.setNome("Produto C");
-        assertEquals("Produto C", produto.getNome());
-        
-        produto.setDescricao("Descrição C");
-        assertEquals("Descrição C", produto.getDescricao());
-        
-        produto.setPreco(30.0);
-        assertEquals(30.0, produto.getPreco());
-        
-        produto.setQuantidadeEstoque(200);
-        assertEquals(200, produto.getQuantidadeEstoque());
-        
-        produto.setAtivo(false);
-        assertFalse(produto.getAtivo());
-    }
+            String expected = "Produto{id=null, nome='Produto D', descricao='Descrição D', preco=40.0, quantidadeEstoque=300, ativo=true}";
+            assertEquals(expected, produto.toString());
+        }
 
 }

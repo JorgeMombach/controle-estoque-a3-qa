@@ -3,11 +3,11 @@
 Este projeto visa desenvolver um sistema simples de controle de estoque como parte do projeto final (A3) da disciplina de Gestão e Qualidade de Software.
 
 
-## Dependências
+## Requisitos
 
-- **Java 17** ou sperior;
-- **Maven** para gerenciamento de dependências;
-- **JUnit** para testes automatizados;
+- [Java 17](https://adoptium.net/temurin/releases/?os=windows&package=jdk&version=17) ou sperior;
+- [Maven](https://maven.apache.org/download.cgi) para gerenciamento de dependências;
+- [JUnit](https://junit.org/junit5/) para testes automatizados;
 
 
 ## Estrutura do Projeto
@@ -35,23 +35,31 @@ Para rodar a aplicação, siga os seguintes passos:
 
 - Clone o repositório:
 
-`git clone https://github.com/SEU_USUARIO/controle-estoque.git`
+```sh
+git clone https://github.com/SEU_USUARIO/controle-estoque.git
+```
 
 - Crie o schema no banco de dados, por exemplo, `en_produto`.
 
 - Modifique as configurações do banco de dados no arquivo `src/main/resources/application.properties`, ajustando o usuário, senha e URL conforme seu ambiente:
 
-> spring.datasource.url=jdbc:postgresql://localhost:5432/seu_bd
-> spring.datasource.username=seu_usuario
-> spring.datasource.password=sua_senha
+```sh
+spring.datasource.url=jdbc:postgresql://localhost:5432/seu_bd
+spring.datasource.username=seu_usuario
+spring.datasource.password=sua_senha
+```
 
 - Compile o projeto utilizando Maven:
 
-`mvn clean install`
+```sh
+mvn clean install
+```
 
 - Para rodar os testes:
 
-`mvn test`
+```sh
+mvn test
+```
 
 ---
 

@@ -25,6 +25,9 @@ public class Produto {
         if (nome == null) {
             throw new IllegalArgumentException("O nome do produto não pode ser nulo.");
         }
+        if (preco < 0) {
+            throw new IllegalArgumentException("O preço do produto não pode ser negativo.");
+        }
 
         this.nome = nome;
         this.descricao = descricao;
@@ -56,7 +59,7 @@ public class Produto {
         if (nome == null) {
             throw new IllegalArgumentException("O nome do produto não pode ser nulo.");
         }
-        
+
         this.nome = nome;
     }
 
@@ -73,6 +76,10 @@ public class Produto {
     }
 
     public void setPreco(double preco) {
+        if (preco < 0) {
+            throw new IllegalArgumentException("O preço do produto não pode ser negativo.");
+        }
+        
         this.preco = preco;
     }
 

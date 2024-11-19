@@ -86,4 +86,18 @@ class ControleEstoqueApplicationTests {
         assertEquals("A quantidade em estoque não pode ser negativa.", exception.getMessage());
     }
 
+    @Test
+    void testConstrutorComValoresNegativos() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
+            () -> new Produto("Produto A", "Descrição A", -15.0, 10, true));
+        assertEquals("O preço do produto não pode ser negativo.", exception.getMessage());
+    }
+
+    @Test
+    void testConstrutorComNomeNulo() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
+            () -> new Produto(null, "Descrição B", 20.0, 10));
+        assertEquals("O nome do produto não pode ser nulo.", exception.getMessage());
+    }
+
 }

@@ -22,6 +22,10 @@ public class Produto {
     }
 
     public Produto(String nome, String descricao, double preco, int quantidadeEstoque, Boolean ativo) {
+        if (nome == null) {
+            throw new IllegalArgumentException("O nome do produto não pode ser nulo.");
+        }
+
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -49,6 +53,10 @@ public class Produto {
     }
 
     public void setNome(String nome) {
+        if (nome == null) {
+            throw new IllegalArgumentException("O nome do produto não pode ser nulo.");
+        }
+        
         this.nome = nome;
     }
 

@@ -37,4 +37,15 @@ class ProdutoIntegrationTest {
         assertEquals("Produto Teste", produtoEncontrado.get().getNome());
     }
 
+    @Test
+    void testAtualizarProduto() {
+        Produto produto = new Produto("Produto Teste", "Descrição Teste", 10.0, 100, true);
+        Produto produtoSalvo = produtoRepository.save(produto);
+
+        produtoSalvo.setNome("Produto Atualizado");
+        Produto produtoAtualizado = produtoRepository.save(produtoSalvo);
+
+        assertEquals("Produto Atualizado", produtoAtualizado.getNome());
+    }
+
 }

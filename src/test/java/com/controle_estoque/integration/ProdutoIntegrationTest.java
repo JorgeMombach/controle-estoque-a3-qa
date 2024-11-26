@@ -60,4 +60,13 @@ class ProdutoIntegrationTest {
         assertFalse(produtoDeletado.isPresent());
     }
 
+    @Test
+    void testSalvarProdutoInvalido() {
+        Produto produto = new Produto(); // Produto sem campos obrigatórios
+
+        Exception exception = assertThrows(Exception.class, () -> produtoRepository.save(produto));
+
+        assertTrue(exception.getMessage().contains("not-null"));
+    }
+
 }

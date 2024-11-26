@@ -48,4 +48,16 @@ class ProdutoIntegrationTest {
         assertEquals("Produto Atualizado", produtoAtualizado.getNome());
     }
 
+    @Test
+    void testDeletarProduto() {
+        Produto produto = new Produto("Produto Teste", "Descrição Teste", 10.0, 100, true);
+        Produto produtoSalvo = produtoRepository.save(produto);
+
+        produtoRepository.deleteById(produtoSalvo.getId());
+
+        Optional<Produto> produtoDeletado = produtoRepository.findById(produtoSalvo.getId());
+
+        assertFalse(produtoDeletado.isPresent());
+    }
+
 }

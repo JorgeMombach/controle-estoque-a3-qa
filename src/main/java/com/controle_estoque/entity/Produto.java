@@ -22,6 +22,16 @@ public class Produto {
     }
 
     public Produto(String nome, String descricao, double preco, int quantidadeEstoque, Boolean ativo) {
+        if (nome == null) {
+            throw new IllegalArgumentException("O nome do produto não pode ser nulo.");
+        }
+        if (preco < 0) {
+            throw new IllegalArgumentException("O preço do produto não pode ser negativo.");
+        }
+        if (quantidadeEstoque < 0) {
+            throw new IllegalArgumentException("A quantidade em estoque não pode ser negativa.");
+        }
+
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -49,6 +59,10 @@ public class Produto {
     }
 
     public void setNome(String nome) {
+        if (nome == null) {
+            throw new IllegalArgumentException("O nome do produto não pode ser nulo.");
+        }
+
         this.nome = nome;
     }
 
@@ -65,6 +79,10 @@ public class Produto {
     }
 
     public void setPreco(double preco) {
+        if (preco < 0) {
+            throw new IllegalArgumentException("O preço do produto não pode ser negativo.");
+        }
+
         this.preco = preco;
     }
 
@@ -73,6 +91,10 @@ public class Produto {
     }
 
     public void setQuantidadeEstoque(int quantidadeEstoque) {
+        if (quantidadeEstoque < 0) {
+            throw new IllegalArgumentException("A quantidade em estoque não pode ser negativa.");
+        }
+        
         this.quantidadeEstoque = quantidadeEstoque;
     }
 

@@ -2,6 +2,7 @@ package com.controle_estoque;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -12,10 +13,11 @@ import com.controle_estoque.entity.Produto;
 @SpringBootTest
 class ControleEstoqueApplicationTests {
 
-	@Test
-	void testConstrutorCompleto() {
+    // PRIMEIRA BATERIA DE TESTES
+    @Test
+    void testConstrutorCompleto() {
         Produto produto = new Produto("Produto A", "Descrição A", 10.0, 100, false);
-        
+
         assertEquals("Produto A", produto.getNome());
         assertEquals("Descrição A", produto.getDescricao());
         assertEquals(10.0, produto.getPreco());
@@ -23,10 +25,10 @@ class ControleEstoqueApplicationTests {
         assertFalse(produto.getAtivo());
     }
 
-	@Test
+    @Test
     void testConstrutorSemAtivo() {
         Produto produto = new Produto("Produto B", "Descrição B", 20.0, 50);
-        
+
         assertEquals("Produto B", produto.getNome());
         assertEquals("Descrição B", produto.getDescricao());
         assertEquals(20.0, produto.getPreco());
@@ -34,32 +36,68 @@ class ControleEstoqueApplicationTests {
         assertTrue(produto.getAtivo());
     }
 
-        @Test
-        void testGettersAndSetters() {
-            Produto produto = new Produto();
-            
-            produto.setNome("Produto C");
-            assertEquals("Produto C", produto.getNome());
-            
-            produto.setDescricao("Descrição C");
-            assertEquals("Descrição C", produto.getDescricao());
-            
-            produto.setPreco(30.0);
-            assertEquals(30.0, produto.getPreco());
-            
-            produto.setQuantidadeEstoque(200);
-            assertEquals(200, produto.getQuantidadeEstoque());
-            
-            produto.setAtivo(false);
-            assertFalse(produto.getAtivo());
-        }
+    @Test
+    void testGettersAndSetters() {
+        Produto produto = new Produto();
 
-        @Test
-        void testToString() {
-            Produto produto = new Produto("Produto D", "Descrição D", 40.0, 300, true);
-        
-            String expected = "Produto{id=null, nome='Produto D', descricao='Descrição D', preco=40.0, quantidadeEstoque=300, ativo=true}";
-            assertEquals(expected, produto.toString());
-        }
+        produto.setNome("Produto C");
+        assertEquals("Produto C", produto.getNome());
+
+        produto.setDescricao("Descrição C");
+        assertEquals("Descrição C", produto.getDescricao());
+
+        produto.setPreco(30.0);
+        assertEquals(30.0, produto.getPreco());
+
+        produto.setQuantidadeEstoque(200);
+        assertEquals(200, produto.getQuantidadeEstoque());
+
+        produto.setAtivo(false);
+        assertFalse(produto.getAtivo());
+    }
+
+    @Test
+    void testToString() {
+        Produto produto = new Produto("Produto D", "Descrição D", 40.0, 300, true);
+
+        String expected = "Produto{id=null, nome='Produto D', descricao='Descrição D', preco=40.0, quantidadeEstoque=300, ativo=true}";
+        assertEquals(expected, produto.toString());
+    }
+
+    // SEGUNDA BATERIA DE TESTES
+    @Test
+    void testSetNomeNulo() {
+        Produto produto = new Produto();
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> produto.setNome(null));
+        assertEquals("O nome do produto não pode ser nulo.", exception.getMessage());
+    }
+
+    @Test
+    void testSetPrecoNegativo() {
+        Produto produto = new Produto();
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> produto.setPreco(-10.0));
+        assertEquals("O preço do produto não pode ser negativo.", exception.getMessage());
+    }
+
+    @Test
+    void testSetQuantidadeEstoqueNegativa() {
+        Produto produto = new Produto();
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> produto.setQuantidadeEstoque(-5));
+        assertEquals("A quantidade em estoque não pode ser negativa.", exception.getMessage());
+    }
+
+    @Test
+    void testConstrutorComValores() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> new Produto("Produto A", "Descrição A", -15.0, 10, true));
+        assertEquals("O preço do produto não pode ser negativo.", exception.getMessage());
+    }
+
+    @Test
+    void testConstrutorComNomeNulo() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> new Produto(null, "Descrição B", 20.0, 10, true));
+        assertEquals("O nome do produto não pode ser nulo.", exception.getMessage());
+    }
 
 }

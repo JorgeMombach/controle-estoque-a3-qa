@@ -58,4 +58,44 @@ class ProdutoResourceIntegrationTest {
                 .andExpect(jsonPath("$[0].nome", is("Produto Teste")));
     }
 
+    @Test
+    void testGetProdutoById() throws Exception {
+        Produto produto = new Produto("Produto Teste", "Descrição Teste", 10.0, 100, true);
+        Produto produtoSalvo = produtoRepository.save(produto);
+
+        mockMvc.perform(get("/api/produtos/" + produtoSalvo.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nome", is("Produto Teste")))
+                .andExpect(jsonPath("$.descricao", is("Descrição Teste")))
+                .andExpect(jsonPath("$.preco", is(10.0)))
+                .andExpect(jsonPath("$.quantidadeEstoque", is(100)))
+                .andExpect(jsonPath("$.ativo", is(true)));
+    }
+
+    @Test
+    void testPutProduto() throws Exception {
+        Produto produto = new Produto("Produto Teste", "Descrição Teste", 10.0, 100, true);
+        Produto produtoSalvo = produtoRepository.save(produto);
+
+        String produtoAtualizadoJson = """
+                    {
+                        "nome": "Produto Atualizado",
+                        "descricao": "Descrição Atualizada",
+                        "preco": 20.0,
+                        "quantidadeEstoque": 200,
+                        "ativo": true
+                    }
+                """;
+
+        mockMvc.perform(put("/api/produtos/" + produtoSalvo.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(produtoAtualizadoJson))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nome", is("Produto Atualizado")))
+                .andExpect(jsonPath("$.descricao", is("Descrição Atualizada")))
+                .andExpect(jsonPath("$.preco", is(20.0)))
+                .andExpect(jsonPath("$.quantidadeEstoque", is(200)))
+                .andExpect(jsonPath("$.ativo", is(true)));
+    }
+
 }

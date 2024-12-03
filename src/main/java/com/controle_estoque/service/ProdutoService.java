@@ -37,11 +37,18 @@ public class ProdutoService {
         return produtoRepository.save(produtoAtualizado);
     }
 
-    public void excluirProduto(Long id) {
+    public void desativarProduto(Long id) {
         Produto produto = produtoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
         produto.setAtivo(false);
         produtoRepository.save(produto);
     }
+
+    public void excluirProduto(Long id) {
+        if (!produtoRepository.existsById(id)) {
+            throw new RuntimeException("Produto não encontrado");
+        }
+        produtoRepository.deleteById(id);
+    }    
 }
 

@@ -17,10 +17,11 @@ A estrutura do projeto segue a convenção do Maven, com o código-fonte localiz
 
 ## Testes
 
-Os primeiros testes para este projeto foram realizados utilizando o **JUnit**. Os testes estão localizados no arquivo:
+Os primeiros testes para este projeto foram realizados utilizando o **JUnit**. Os testes estão localizados no diretório:
 
-> src/test/java/com/controle_estoque/ControleEstoqueApplicationTests.java
+> src/test/java/com/controle_estoque
 
+<br>
 
 ### Testes Realizados
 

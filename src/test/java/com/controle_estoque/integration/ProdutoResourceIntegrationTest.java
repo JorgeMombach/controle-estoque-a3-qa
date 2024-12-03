@@ -29,7 +29,7 @@ class ProdutoResourceIntegrationTest {
                     {
                         "nome": "Produto Teste",
                         "descricao": "Descrição Teste",
-                        "preco": 15.0,
+                        "preco": 10.0,
                         "quantidadeEstoque": 100,
                         "ativo": true
                     }

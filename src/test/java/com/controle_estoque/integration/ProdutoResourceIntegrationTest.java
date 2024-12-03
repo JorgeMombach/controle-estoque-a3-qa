@@ -98,4 +98,16 @@ class ProdutoResourceIntegrationTest {
                 .andExpect(jsonPath("$.ativo", is(true)));
     }
 
+    @Test
+    void testDeleteProduto() throws Exception {
+        Produto produto = new Produto("Produto Teste", "Descrição Teste", 10.0, 100, true);
+        Produto produtoSalvo = produtoRepository.save(produto);
+
+        mockMvc.perform(delete("/api/produtos/" + produtoSalvo.getId()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/produtos/" + produtoSalvo.getId()))
+                .andExpect(status().isNotFound());
+    }
+
 }

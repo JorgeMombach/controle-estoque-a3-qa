@@ -55,8 +55,6 @@ Para rodar a aplicação, siga os seguintes passos:
 git clone https://github.com/SEU_USUARIO/controle-estoque.git
 ```
 
-- Crie o schema no banco de dados, por exemplo, `en_produto`.
-
 - Modifique as configurações do banco de dados no arquivo `src/main/resources/application.properties`, ajustando o usuário, senha e URL conforme seu ambiente:
 
 ```sh

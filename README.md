@@ -52,7 +52,7 @@ Para rodar a aplicação, siga os seguintes passos:
 - Clone o repositório:
 
 ```sh
-git clone https://github.com/SEU_USUARIO/controle-estoque.git
+https://github.com/JorgeMombach/controle-estoque-a3-qa.git
 ```
 
 - Modifique as configurações do banco de dados no arquivo `src/main/resources/application.properties`, ajustando o usuário, senha e URL conforme seu ambiente:
